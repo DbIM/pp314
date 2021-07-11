@@ -16,10 +16,10 @@ public class CrudRestApiApplication {
                 .getValuesAsList("set-cookie")
                 .get(0);
 
-        User user = new User(3L, "Alexandr", "Dostoevsky", (byte) 25);
-        userService.addUser(user, SessionID);
+        User addUser = new User(3L, "James", "Brown", (byte) 25);
+        userService.addUser(addUser, SessionID);
 
-        user.setAge((byte) 29);
+        User user = new User(3L, "Thomas", "Shelby", (byte) 29);
         userService.editUser(user, SessionID);
 
         userService.deleteUser(user, SessionID);

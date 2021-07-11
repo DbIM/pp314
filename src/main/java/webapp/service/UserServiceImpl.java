@@ -31,7 +31,8 @@ public class UserServiceImpl implements UserService{
     public void addUser(User user, String sessionId) {
         headers.add("Cookie", sessionId);
         HttpEntity<User> requestEntity = new HttpEntity<>(user, headers);
-        restTemplate.postForObject(URL, requestEntity, String.class);
+        String result = restTemplate.postForObject(URL, requestEntity, String.class);
+        System.out.println("result 1: " + result);
         System.out.println();
     }
 
@@ -39,7 +40,8 @@ public class UserServiceImpl implements UserService{
     public void editUser(User user, String sessionId) {
         headers.add("Cookie", sessionId);
         HttpEntity<User> requestEntity = new HttpEntity<>(user, headers);
-        restTemplate.exchange(URL, HttpMethod.PUT, requestEntity, String.class).getBody();
+        ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.PUT, requestEntity, String.class);
+        System.out.println("result 2: " + responseEntity.getBody());
         System.out.println();
     }
 
@@ -47,7 +49,8 @@ public class UserServiceImpl implements UserService{
     public void deleteUser(User user, String sessionId) {
         headers.add("Cookie", sessionId);
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
-        restTemplate.exchange(URL + "/" + user.getId(), HttpMethod.DELETE, requestEntity, String.class).getBody();
+        ResponseEntity<String> responseEntity = restTemplate.exchange(URL + "/" + user.getId(), HttpMethod.DELETE, requestEntity, String.class);
+        System.out.println("result 3: " + responseEntity.getBody());
         System.out.println();
     }
 }
