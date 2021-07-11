@@ -24,5 +24,4 @@ public class CrudRestApiApplication {
 
         userService.deleteUser(user, SessionID);
     }
-
 }

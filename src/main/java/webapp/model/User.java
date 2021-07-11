@@ -16,5 +16,4 @@ public class User {
     private String name;
     private String lastName;
     private byte age;
-
 }
