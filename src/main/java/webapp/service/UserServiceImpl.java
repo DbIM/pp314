@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 @Service
 public class UserServiceImpl implements UserService{
+    String finalResult;
 
     private static final RestTemplate restTemplate = new RestTemplate();
     private static final HttpHeaders headers = new HttpHeaders();
@@ -33,6 +34,7 @@ public class UserServiceImpl implements UserService{
         HttpEntity<User> requestEntity = new HttpEntity<>(user, headers);
         String result = restTemplate.postForObject(URL, requestEntity, String.class);
         System.out.println("result 1: " + result);
+        finalResult = result;
         System.out.println();
     }
 
@@ -42,6 +44,7 @@ public class UserServiceImpl implements UserService{
         HttpEntity<User> requestEntity = new HttpEntity<>(user, headers);
         ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.PUT, requestEntity, String.class);
         System.out.println("result 2: " + responseEntity.getBody());
+        finalResult = finalResult + responseEntity.getBody();
         System.out.println();
     }
 
@@ -51,6 +54,7 @@ public class UserServiceImpl implements UserService{
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
         ResponseEntity<String> responseEntity = restTemplate.exchange(URL + "/" + user.getId(), HttpMethod.DELETE, requestEntity, String.class);
         System.out.println("result 3: " + responseEntity.getBody());
-        System.out.println();
+        finalResult = finalResult + responseEntity.getBody();
+        System.out.println(finalResult);
     }
 }
